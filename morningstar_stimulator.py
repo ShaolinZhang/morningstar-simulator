@@ -52,11 +52,13 @@ def retrieveRatings(files, day):
     data_pairs = re.findall(pattern, raw['content'])
     res = defaultdict(int)
     for data in data_pairs:
-        pair = data.split(' ');
-        if len(pair[1]) > 2:
-            res[pair[0][1:-1]] = len(pair[1])
-        else:
-            res[' '.join([pair[0][1:-1], pair[1][0:-1]])] = len(pair[2])
+        split = data.index(')')
+        res[data[1:split]] = len(data[split+2:])
+#         pair = data.split(' ');
+#         if len(pair[1]) > 2:
+#             res[pair[0][1:-1]] = len(pair[1])
+#         else:
+#             res[' '.join([pair[0][1:-1], pair[1][0:-1]])] = len(pair[2])
     
     return res
 
